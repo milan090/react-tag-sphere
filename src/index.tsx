@@ -10,7 +10,7 @@ import {
 
 type TagSphereProps = {
   /** Can be list of strings, html elements or react components */
-  texts: (string | ReactNode)[];
+  tags: (string | ReactNode)[];
   /** @default texts.length * 15 */
   radius?: number;
   /**@default 7 */
@@ -162,7 +162,7 @@ const createItem = (
 };
 
 const defaultState: TagSphereProps = {
-  texts: [
+  tags: [
     "This",
     "is",
     "TagSphere.",
@@ -196,7 +196,7 @@ export const TagSphere: React.FC<Partial<TagSphereProps>> = (props) => {
   const {
     maxSpeed,
     initialSpeed,
-    texts,
+    tags,
     initialDirection,
     keepRollingAfterMouseOut,
     fullHeight,
@@ -207,20 +207,20 @@ export const TagSphere: React.FC<Partial<TagSphereProps>> = (props) => {
     blur,
   }: TagSphereProps = { ...defaultState, ...props };
 
-  const radius = props.radius || texts.length * 15;
+  const radius = props.radius || tags.length * 15;
 
   const depth = 2 * radius;
   const size = 1.5 * radius;
-  const itemHooks = texts.map(() => createRef());
+  const itemHooks = tags.map(() => createRef());
   const [items, setItems]: [any[], any] = useState([]);
 
   useEffect(() => {
     setItems(() =>
-      texts.map((text, index) =>
-        createItem(text, index, texts.length, size, itemHooks[index])
+    tags.map((text, index) =>
+        createItem(text, index, tags.length, size, itemHooks[index])
       )
     );
-  }, [texts]);
+  }, [tags]);
 
   const containerRef = useRef(null);
   const [firstRender, setFirstRender] = useState(true);

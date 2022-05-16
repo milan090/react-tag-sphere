@@ -2,7 +2,7 @@ import React from "react";
 import { CSSProperties, ReactNode } from "react";
 declare type TagSphereProps = {
     /** Can be list of strings, html elements or react components */
-    texts: (string | ReactNode)[];
+    tags: (string | ReactNode)[];
     /** @default texts.length * 15 */
     radius?: number;
     /**@default 7 */
