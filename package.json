@@ -1,0 +1,32 @@
+{
+  "name": "react-tag-sphere",
+  "version": "1.0.0",
+  "description": "Simple React Tag Sphere component with blur effect",
+  "author": "milan090",
+  "license": "MIT",
+  "private": false,
+  "main": "./lib/cjs/index.js",
+  "module": "./lib/esm/index.js",
+  "types": "./lib/esm/index.d.ts",
+  "scripts": {
+    "dev": "nodemon --watch \"src/**\" --ext \"ts,tsx\" --ignore \"src/**/*.spec.ts\" --exec yarn build",
+    "build": "yarn build:esm && yarn build:cjs",
+    "build:esm": "tsc",
+    "build:cjs": "tsc --module commonjs --outDir lib/cjs"
+  },
+  "devDependencies": {
+    "@types/react": "^18.0.9",
+    "@types/react-dom": "^18.0.4",
+    "nodemon": "^2.0.16",
+    "react": "^18.1.0",
+    "react-dom": "^18.1.0",
+    "typescript": "^4.6.4"
+  },
+  "peerDependencies": {
+    "react": "^18.1.0",
+    "react-dom": "^18.1.0"
+  },
+  "files": [
+    "/lib"
+  ]
+}
