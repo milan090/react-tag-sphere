@@ -34,7 +34,9 @@ function App() {
         }}
         tags={tags}
         keepRollingAfterMouseOut={true}
-        blur={false}
+        blur={true}
+        blurMultiplier={0.4}
+        grayscale={false}
       />
     </div>
   );

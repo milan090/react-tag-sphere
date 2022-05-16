@@ -35,6 +35,14 @@ type TagSphereProps = {
 
   /** @default true */
   blur: boolean;
+
+  /**
+   * Value between 0 and 1
+   * @default 1 */
+  blurMultiplier: number;
+
+  /** @default true */
+  grayscale: boolean;
 };
 
 const defaultStyles = {
@@ -68,8 +76,13 @@ const updateItemPosition = (
   sc: number[],
   depth: number,
   userSelect: boolean,
-  blur: boolean
+  blur: boolean,
+  blurMultiplier: number,
+  grayscale: boolean
 ) => {
+  if (blurMultiplier > 1 || blurMultiplier < 0)
+    throw new Error("blurMultiplier should have value between 0 and 1");
+
   const newItem = { ...item, scale: "" };
   const rx1 = item.x;
   const ry1 = item.y * sc[1] + item.z * -sc[0];
@@ -108,10 +121,16 @@ const updateItemPosition = (
 
   itemEl.style.transform = transform;
 
-  if (blur)
-    itemEl.style.filter = `grayscale(${(alpha - 1) * -8}) blur(${
-      (alpha - 1) * -5 > 1 ? Math.floor((alpha - 1) * -8) : 0
+  let filter = "";
+  if (grayscale) {
+    filter += `grayscale(${(alpha - 1) * -8}) `;
+  }
+  if (blur) {
+    filter += `blur(${
+      (alpha - 1) * -5 > 1 ? Math.floor((alpha - 1) * -8) * blurMultiplier : 0
     }px)`;
+  }
+  itemEl.style.filter = filter;
   itemEl.style.zIndex = Math.floor(alpha * 1000) + "";
 
   itemEl.style.opacity = alpha + "";
@@ -184,11 +203,13 @@ const defaultState: TagSphereProps = {
   initialSpeed: 32,
   initialDirection: 135,
   keepRollingAfterMouseOut: true,
-  
+
   fullWidth: false,
   fullHeight: false,
   userSelect: false,
   blur: true,
+  blurMultiplier: 1,
+  grayscale: true,
 };
 
 export const TagSphere: React.FC<Partial<TagSphereProps>> = (props) => {
@@ -202,9 +223,11 @@ export const TagSphere: React.FC<Partial<TagSphereProps>> = (props) => {
     fullHeight,
     fullWidth,
     style,
-    
+
     userSelect,
     blur,
+    blurMultiplier,
+    grayscale,
   }: TagSphereProps = { ...defaultState, ...props };
 
   const radius = props.radius || tags.length * 15;
@@ -216,7 +239,7 @@ export const TagSphere: React.FC<Partial<TagSphereProps>> = (props) => {
 
   useEffect(() => {
     setItems(() =>
-    tags.map((text, index) =>
+      tags.map((text, index) =>
         createItem(text, index, tags.length, size, itemHooks[index])
       )
     );
@@ -302,7 +325,15 @@ export const TagSphere: React.FC<Partial<TagSphereProps>> = (props) => {
       ];
 
       return items.map((item: any) =>
-        updateItemPosition(item, sc, depth, userSelect, blur)
+        updateItemPosition(
+          item,
+          sc,
+          depth,
+          userSelect,
+          blur,
+          blurMultiplier,
+          grayscale
+        )
       );
     });
   };

@@ -25,6 +25,12 @@ declare type TagSphereProps = {
     userSelect: boolean;
     /** @default true */
     blur: boolean;
+    /**
+     * Value between 0 and 1
+     * @default 1 */
+    blurMultiplier: number;
+    /** @default true */
+    grayscale: boolean;
 };
 export declare const TagSphere: React.FC<Partial<TagSphereProps>>;
 export {};

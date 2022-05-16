@@ -80,3 +80,5 @@ export default function App() {
 | fullHeight | boolean | false |
 | userSelect | boolean | false |
 | blur | boolean | true |
+| blurMultiplier | number | 1 |
+| grayscale | boolean | true |
