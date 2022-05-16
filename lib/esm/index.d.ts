@@ -17,8 +17,6 @@ declare type TagSphereProps = {
     keepRollingAfterMouseOut: boolean;
     className?: string;
     style?: CSSProperties;
-    /** @default true */
-    useContainerInlineStyles: boolean;
     fullWidth: boolean;
     fullHeight: boolean;
     /** Make the items highlightable with selection

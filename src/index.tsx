@@ -11,22 +11,20 @@ import {
 type TagSphereProps = {
   /** Can be list of strings, html elements or react components */
   texts: (string | ReactNode)[];
- /** @default texts.length * 15 */
+  /** @default texts.length * 15 */
   radius?: number;
   /**@default 7 */
   maxSpeed: number;
   /** @default 32 */
   initialSpeed: number;
-  /** In degrees 
-   * @default 135 
+  /** In degrees
+   * @default 135
    */
   initialDirection: 135;
   /** @default true */
   keepRollingAfterMouseOut: boolean;
   className?: string;
   style?: CSSProperties;
-  /** @default true */
-  useContainerInlineStyles: boolean;
   fullWidth: boolean;
   fullHeight: boolean;
 
@@ -186,7 +184,7 @@ const defaultState: TagSphereProps = {
   initialSpeed: 32,
   initialDirection: 135,
   keepRollingAfterMouseOut: true,
-  useContainerInlineStyles: true,
+  
   fullWidth: false,
   fullHeight: false,
   userSelect: false,
@@ -194,6 +192,7 @@ const defaultState: TagSphereProps = {
 };
 
 export const TagSphere: React.FC<Partial<TagSphereProps>> = (props) => {
+  // props.style = defaultState.style
   const {
     maxSpeed,
     initialSpeed,
@@ -203,9 +202,9 @@ export const TagSphere: React.FC<Partial<TagSphereProps>> = (props) => {
     fullHeight,
     fullWidth,
     style,
-    useContainerInlineStyles,
+    
     userSelect,
-    blur
+    blur,
   }: TagSphereProps = { ...defaultState, ...props };
 
   const radius = props.radius || texts.length * 15;
@@ -302,7 +301,9 @@ export const TagSphere: React.FC<Partial<TagSphereProps>> = (props) => {
         Math.cos(b * l),
       ];
 
-      return items.map((item: any) => updateItemPosition(item, sc, depth, userSelect, blur));
+      return items.map((item: any) =>
+        updateItemPosition(item, sc, depth, userSelect, blur)
+      );
     });
   };
 
@@ -353,11 +354,10 @@ export const TagSphere: React.FC<Partial<TagSphereProps>> = (props) => {
           setActive(false);
         }
       }}
-      style={
-        useContainerInlineStyles
-          ? style || defaultStyles.getContainer(radius, fullWidth, fullHeight)
-          : undefined
-      }
+      style={{
+        ...defaultStyles.getContainer(radius, fullWidth, fullHeight),
+        ...style,
+      }}
     >
       {items.map((item) => item.el)}
     </div>
