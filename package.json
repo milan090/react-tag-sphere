@@ -5,7 +5,7 @@
   "author": "milan090",
   "license": "MIT",
   "private": false,
-  "repository": "AnishDe12020/storli",
+  "repository": "milan090/react-tag-sphere",
   "homepage": "https://github.com/milan090/react-tag-sphere#readme",
   "bugs": "https://github.com/milan090/react-tag-sphere/issues",
   "main": "./lib/cjs/index.js",
