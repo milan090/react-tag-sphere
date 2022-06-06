@@ -5,6 +5,9 @@
   "author": "milan090",
   "license": "MIT",
   "private": false,
+  "repository": "milan090/react-tag-sphere",
+  "homepage": "https://github.com/milan090/react-tag-sphere#readme",
+  "bugs": "https://github.com/milan090/react-tag-sphere/issues",
   "main": "./lib/cjs/index.js",
   "module": "./lib/esm/index.js",
   "types": "./lib/esm/index.d.ts",
@@ -28,5 +31,9 @@
   },
   "files": [
     "/lib"
+  ],
+  "keywords": [
+    "react",
+    "tag-sphere"
   ]
 }
